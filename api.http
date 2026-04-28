@@ -1,0 +1,47 @@
+@baseUrl = http://localhost:3000
+@productoId = 1
+
+### 0) Listar productos
+GET {{baseUrl}}/productos
+
+### 1) Caso 1 - Crear producto valido (debe responder 201)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "Laptop",
+  "precio": 3500.50,
+  "stock": 10
+}
+
+### 2) Caso 2 - Crear producto invalido (precio negativo, debe responder 400)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "Mouse",
+  "precio": -20,
+  "stock": 5
+}
+
+### 3) Obtener producto existente (ajustar productoId si es necesario)
+GET {{baseUrl}}/productos/{{productoId}}
+
+### 4) Caso 3 - Obtener producto inexistente (debe responder 404)
+GET {{baseUrl}}/productos/9999
+
+### 5) Caso 4 - Actualizar producto (debe responder 200)
+PUT {{baseUrl}}/productos/{{productoId}}
+Content-Type: application/json
+
+{
+  "nombre": "Laptop Gamer",
+  "precio": 4200,
+  "stock": 8
+}
+
+### 6) Caso 5 - Eliminar producto (debe responder 200)
+DELETE {{baseUrl}}/productos/{{productoId}}
+
+### 7) Verificar que no aparezca en la lista
+GET {{baseUrl}}/productos

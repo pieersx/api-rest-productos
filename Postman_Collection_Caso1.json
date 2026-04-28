@@ -1,0 +1,141 @@
+{
+  "info": {
+    "name": "Caso Practico 1 - API Productos",
+    "description": "Coleccion de pruebas para CRUD de productos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Caso 1 - Crear producto valido (201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop\",\n  \"precio\": 3500.50,\n  \"stock\": 10\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Caso 2 - Crear producto invalido (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Mouse\",\n  \"precio\": -20,\n  \"stock\": 5\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Caso 3 - Obtener producto inexistente (404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos/9999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "9999"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Caso 4 - Actualizar producto (200)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Laptop Gamer\",\n  \"precio\": 4200,\n  \"stock\": 8\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Caso 5 - Eliminar producto (200)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Verificar lista despues de eliminar",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ]
+}
