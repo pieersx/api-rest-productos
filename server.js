@@ -2,7 +2,14 @@ const express = require("express");
 require("dotenv").config();
 
 const sequelize = require("./config/database");
-require("./models/Producto");
+const Pedido = require("./models/Pedido");
+const DetallePedido = require("./models/DetallePedido");
+const Producto = require("./models/Producto");
+
+Pedido.hasMany(DetallePedido, { foreignKey: "pedidoId", onDelete: "CASCADE" });
+DetallePedido.belongsTo(Pedido, { foreignKey: "pedidoId" });
+
+const pedidosRoutes = require("./routes/pedidos");
 const productosRoutes = require("./routes/productos");
 
 const app = express();
@@ -10,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.use(pedidosRoutes);
 app.use(productosRoutes);
 
 app.use((req, res) => {
